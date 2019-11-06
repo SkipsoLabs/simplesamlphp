@@ -56,6 +56,7 @@ if ($issuer === null) {
 }
 
 if ($issuer instanceof \SAML2\XML\saml\Issuer) {
+    /** @psalm-var string|null $issuer */
     $issuer = $issuer->getValue();
     if ($issuer === null) {
         // no issuer found in the assertions
