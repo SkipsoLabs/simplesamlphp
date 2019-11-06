@@ -367,6 +367,7 @@ class SAML2
                     'Received message on authentication request endpoint without issuer.'
                 );
             } elseif ($issuer instanceof Issuer) {
+                /** @psalm-var string|null $spEntityId */
                 $spEntityId = $issuer->getValue();
                 if ($spEntityId === null) {
                     /* Without an issuer we have no way to respond to the message. */
@@ -607,6 +608,7 @@ class SAML2
             /* Without an issuer we have no way to respond to the message. */
             throw new Error\BadRequest('Received message on logout endpoint without issuer.');
         } elseif ($issuer instanceof Issuer) {
+            /** @psalm-var string|null $spEntityId */
             $spEntityId = $issuer->getValue();
             if ($spEntityId === null) {
                 /* Without an issuer we have no way to respond to the message. */
