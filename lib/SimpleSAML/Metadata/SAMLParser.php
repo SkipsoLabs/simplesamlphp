@@ -1113,6 +1113,7 @@ class SAMLParser
 
                     foreach ($e->getKeywords() as $uiItem) {
                         $keywords = $uiItem->getKeywords();
+                        /** @psalm-var string|null $language */
                         $language = $uiItem->getLanguage();
                         if (($keywords === []) || ($language === null)) {
                             continue;
@@ -1120,6 +1121,7 @@ class SAMLParser
                         $ret['UIInfo']['Keywords'][$language] = $keywords;
                     }
                     foreach ($e->getLogo() as $uiItem) {
+                        /** @psalm-suppress TypeDoesNotContainNull  Remove in SSP 2.0 */
                         if (
                             !($uiItem instanceof Logo)
                             || ($uiItem->getUrl() === null)
