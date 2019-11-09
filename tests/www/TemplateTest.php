@@ -34,10 +34,9 @@ class TemplateTest extends TestCase
         foreach ($files as $file) {
             if (preg_match('/.twig$/', $file)) {
                 $t = new Template($config, $file);
-                $t->disableStrictVariables();
                 ob_start();
                 try {
-                    $t->show();
+                    $t->getTwig()->tokenize();
                     $this->addToAssertionCount(1);
                 } catch (SyntaxError $e) {
                     $this->fail($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
@@ -54,10 +53,9 @@ class TemplateTest extends TestCase
                 foreach ($files as $file) {
                     if (preg_match('/.twig$/', $file)) {
                         $t = new Template($config, $module . ':' . $file);
-                        $t->disableStrictVariables();
                         ob_start();
                         try {
-                            $t->show();
+                            $t->getTwig()->tokenize();
                             $this->addToAssertionCount(1);
                         } catch (SyntaxError $e) {
                             $this->fail($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
