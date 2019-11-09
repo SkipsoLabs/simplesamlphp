@@ -7,6 +7,7 @@ use SimpleSAML\Configuration;
 use SimpleSAML\XHTML\Template;
 use SimpleSAML\Module;
 use Twig\Error\SyntaxError;
+use Twig\Source;
 
 /**
  * Simple test for syntax-checking Twig-templates.
