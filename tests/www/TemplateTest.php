@@ -36,7 +36,8 @@ class TemplateTest extends TestCase
                 $t = new Template($config, $file);
                 ob_start();
                 try {
-                    $t->getTwig()->tokenize();
+                    $source = new Source(file_get_contents($file), $file);
+                    $t->getTwig()->tokenize($source);
                     $this->addToAssertionCount(1);
                 } catch (SyntaxError $e) {
                     $this->fail($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
@@ -55,7 +56,8 @@ class TemplateTest extends TestCase
                         $t = new Template($config, $module . ':' . $file);
                         ob_start();
                         try {
-                            $t->getTwig()->tokenize();
+                            $t->getTwig()->tokenize($source);
+                            $this->addToAssertionCount(1);
                             $this->addToAssertionCount(1);
                         } catch (SyntaxError $e) {
                             $this->fail($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
