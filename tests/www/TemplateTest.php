@@ -37,7 +37,7 @@ class TemplateTest extends TestCase
                 $t = new Template($config, $file);
                 ob_start();
                 try {
-                    $source = new Source(file_get_contents($file), $file);
+                    $source = new Source(file_get_contents($basedir . DIRECTORY_SEPARATOR . $file), $file);
                     $t->getTwig()->tokenize($source);
                     $this->addToAssertionCount(1);
                 } catch (SyntaxError $e) {
@@ -57,8 +57,8 @@ class TemplateTest extends TestCase
                         $t = new Template($config, $module . ':' . $file);
                         ob_start();
                         try {
+                            $source = new Source(file_get_contents($basedir . DIRECTORY_SEPARATOR . $file), $file);
                             $t->getTwig()->tokenize($source);
-                            $this->addToAssertionCount(1);
                             $this->addToAssertionCount(1);
                         } catch (SyntaxError $e) {
                             $this->fail($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
